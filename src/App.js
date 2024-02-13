@@ -3,8 +3,11 @@ import Webcam from "react-webcam";
 import * as THREE from 'three';
 import * as tf from '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-webgl';
+//import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
-import { FaceMesh } from '@mediapipe/face_mesh';
+//import * as faceDetection from '@tensorflow-models/face-detection';
+import '@tensorflow/tfjs-converter';
+//import { FaceDetector } from '@tensorflow-models/face-detection/mediapipe_face_detection';
 import glassesSrc from './glasses.png';
 
 const App = () => {
@@ -31,13 +34,11 @@ const App = () => {
     }
 
     getCameraAccess();
-}, []);
 
-  useEffect(() => {
     const loadModel = async () => {
       await tf.setBackend('webgl');
       const model = await faceLandmarksDetection.load(
-        faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
+        faceLandmarksDetection.SupportedPackages.mediapipeFaceDetector,
         { maxFaces: 1 }
       );
       setModel(model);
@@ -140,11 +141,11 @@ const calculateRoll = (leftEye, rightEye) => {
       const scaleX = -0.01;
       const scaleY = -0.01; // Inverted because Three.js y-axis is opposite to image y-axis
       const offsetX = 0; // Adjust based on scene
-      const offsetY = -0.1; // Adjust based on scene
-      const fixedDepth = -5;
+      const offsetY = -0.05; // Adjust based on scene
+      // const fixedDepth = -5;
 
-      const normalizedX = (eyeCenter[0] / video.videoWidth) * 2 - 1;
-      const normalizedY = ((eyeCenter[1] / video.videoHeight) * 2 - 1);
+      // const normalizedX = (eyeCenter[0] / video.videoWidth) * 2 - 1;
+      // const normalizedY = ((eyeCenter[1] / video.videoHeight) * 2 - 1);
 
       glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
       glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
@@ -164,7 +165,7 @@ const calculateRoll = (leftEye, rightEye) => {
   
   
 
-  const intervalId = setInterval(detect, 200);
+  const intervalId = setInterval(detect, 120);
   return () => clearInterval(intervalId);
 }, [model, glassesMesh, camera, scene]);
 
