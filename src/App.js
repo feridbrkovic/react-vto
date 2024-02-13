@@ -164,7 +164,7 @@ const calculateRoll = (leftEye, rightEye) => {
   
   
 
-  const intervalId = setInterval(detect, 150);
+  const intervalId = setInterval(detect, 200);
   return () => clearInterval(intervalId);
 }, [model, glassesMesh, camera, scene]);
 
