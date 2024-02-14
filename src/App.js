@@ -86,6 +86,8 @@ const App = () => {
     initThree();
   }, []);
 
+  
+
   useEffect(() => {
     // Define the rendering loop of Three.js
     const animate = () => {
@@ -165,7 +167,7 @@ const calculateRoll = (leftEye, rightEye) => {
   
   
 
-  const intervalId = setInterval(detect, 120);
+  const intervalId = setInterval(detect, 200);
   return () => clearInterval(intervalId);
 }, [model, glassesMesh, camera, scene]);
 
