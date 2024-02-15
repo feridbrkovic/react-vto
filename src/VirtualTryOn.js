@@ -12,6 +12,7 @@ const VirtualTryOn = () => {
   const canvasRef = useRef(null);
   const [model, setModel] = useState(null);
   const [glassesMesh, setGlassesMesh] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadResources = async () => {
@@ -28,8 +29,8 @@ const VirtualTryOn = () => {
           faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
           { shouldLoadIrisModel: true,
             maxFaces: 1,
-            returnTensors: false,
-            predictIrises: false 
+            // returnTensors: false,
+            // predictIrises: false 
         }
         );
         setModel(loadedModel);
@@ -53,9 +54,11 @@ const VirtualTryOn = () => {
           const glasses = new THREE.Mesh(geometry, material);
           scene.add(glasses);
           setGlassesMesh(glasses);
+          renderer.setAnimationLoop(() => renderer.render(scene, camera));
         });
       } catch (error) {
         console.error("Initialization error:", error);
+        setIsLoading(false);
       }
     };
 
@@ -70,6 +73,7 @@ const VirtualTryOn = () => {
 
       const faceEstimates = await model.estimateFaces({input: video});
       if (faceEstimates.length > 0) {
+        setIsLoading(false);
         // Face mesh keypoints
         const keypoints = faceEstimates[0].scaledMesh;
         const leftEye = keypoints[130];
@@ -113,6 +117,11 @@ const VirtualTryOn = () => {
       <h1 style={{textAlign: 'center'}}>Virtual Try-On - 2D Image</h1>
     </div>
     <div style={{ position: 'relative', margin:'0 auto', width: '800px', height: '800px' }}>
+        {isLoading && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2 }}>
+            <h3>Loading...</h3>
+          </div>
+        )}
       <Webcam ref={webcamRef} autoPlay playsInline style={{ width: '800px', height: '800px' }} mirrored={true} />
       <canvas ref={canvasRef} style={{ width: '800px', height: '800px', position: 'absolute', top: 0, left: 0 }} />
     </div>
