@@ -84,7 +84,7 @@ const VirtualTryOn = () => {
         const scaleX = -0.01;
         const scaleY = -0.01;
         const offsetX = 0.00;
-        const offsetY = 0.01;
+        const offsetY = -0.01;
 
         // Glasses positioning
         glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
@@ -109,12 +109,12 @@ const VirtualTryOn = () => {
 
   return (
     <>
-    <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)', marginBottom: '0.2rem'}}>
+    <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}>
       <h1 style={{textAlign: 'center'}}>Virtual Try-On - 2D Image</h1>
     </div>
-    <div style={{ position: 'relative', margin:'0 auto', width: '640px', height: '640px' }}>
-      <Webcam ref={webcamRef} autoPlay playsInline style={{ width: '640px', height: '640px' }} mirrored={true} />
-      <canvas ref={canvasRef} style={{ width: '640px', height: '640px', position: 'absolute', top: 0, left: 0 }} />
+    <div style={{ position: 'relative', margin:'0 auto', width: '800px', height: '800px' }}>
+      <Webcam ref={webcamRef} autoPlay playsInline style={{ width: '800px', height: '800px' }} mirrored={true} />
+      <canvas ref={canvasRef} style={{ width: '800px', height: '800px', position: 'absolute', top: 0, left: 0 }} />
     </div>
     </>
   );
