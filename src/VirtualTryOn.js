@@ -78,7 +78,7 @@ const VirtualTryOn = () => {
 
         // Eye distance for glasses scaling
         const eyeDistance = Math.sqrt(Math.pow(rightEye[0] - leftEye[0], 2) + Math.pow(rightEye[1] - leftEye[1], 2));
-        const scaleMultiplier = eyeDistance / 110;
+        const scaleMultiplier = eyeDistance / 120;
 
         // Glasses scaling and offset values
         const scaleX = -0.01;
@@ -90,7 +90,7 @@ const VirtualTryOn = () => {
         glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
         glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
         glassesMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        glassesMesh.position.z = 1;
+        glassesMesh.position.z = 1.5;
 
         // Rotate glasses to align with eyes - rotation depth
         const eyeLine = new THREE.Vector2(rightEye[0] - leftEye[0], rightEye[1] - leftEye[1]);
