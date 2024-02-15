@@ -90,7 +90,7 @@ const VirtualTryOn = () => {
         glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
         glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
         glassesMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        glassesMesh.position.z = 1.5;
+        glassesMesh.position.z = 1;
 
         // Rotate glasses to align with eyes - rotation depth
         const eyeLine = new THREE.Vector2(rightEye[0] - leftEye[0], rightEye[1] - leftEye[1]);
