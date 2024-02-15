@@ -2,9 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import * as THREE from 'three';
 import * as tf from '@tensorflow/tfjs-core';
+import '@tensorflow/tfjs-converter';
 import '@tensorflow/tfjs-backend-webgl';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
-import '@tensorflow/tfjs-converter';
 import glassesSrc from './assets/images/sunglasses.png';
 
 const VirtualTryOn = () => {
@@ -84,13 +84,13 @@ const VirtualTryOn = () => {
         const scaleX = -0.01;
         const scaleY = -0.01;
         const offsetX = 0.00;
-        const offsetY = -0.07;
+        const offsetY = 0;
 
         // Glasses positioning
         glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
         glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
         glassesMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        glassesMesh.position.z = 1.5;
+        glassesMesh.position.z = 1.75;
 
         // Rotate glasses to align with eyes - rotation depth
         const eyeLine = new THREE.Vector2(rightEye[0] - leftEye[0], rightEye[1] - leftEye[1]);
