@@ -3,14 +3,11 @@ import Webcam from 'react-webcam';
 import * as THREE from 'three';
 import * as tf from '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-webgl';
-import '@tensorflow/tfjs-backend-cpu';
-import '@tensorflow/tfjs-backend-wasm';
-//import * as faceDetection from '@tensorflow-models/tfjs-face-detection';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-converter';
-import glassesSrc from './sunglasses.png';
+import glassesSrc from './assets/images/sunglasses.png';
 
-const App = () => {
+const VirtualTryOn = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [model, setModel] = useState(null);
@@ -26,10 +23,14 @@ const App = () => {
         }
 
         // TensorFlow Model
-        await tf.setBackend('wasm');
+        await tf.setBackend('webgl');
         const loadedModel = await faceLandmarksDetection.load(
           faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
-          { maxFaces: 1 }
+          { shouldLoadIrisModel: true,
+            maxFaces: 1,
+            returnTensors: false,
+            predictIrises: false 
+        }
         );
         setModel(loadedModel);
 
@@ -46,7 +47,7 @@ const App = () => {
         // Glasses Mesh
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(glassesSrc, (texture) => {
-          texture.encoding = THREE.sRGBEncoding;
+          texture.colorSpace = THREE.SRGBColorSpace;
           const geometry = new THREE.PlaneGeometry(2, 1);
           const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
           const glasses = new THREE.Mesh(geometry, material);
@@ -69,43 +70,54 @@ const App = () => {
 
       const faceEstimates = await model.estimateFaces({input: video});
       if (faceEstimates.length > 0) {
+        // Face mesh keypoints
         const keypoints = faceEstimates[0].scaledMesh;
         const leftEye = keypoints[130];
         const rightEye = keypoints[359];
         const eyeCenter = keypoints[168];
-        const eyeDistance = Math.sqrt(Math.pow(rightEye[0] - leftEye[0], 2) + Math.pow(rightEye[1] - leftEye[1], 2));
-        const scaleMultiplier = eyeDistance / 130;
 
+        // Eye distance for glasses scaling
+        const eyeDistance = Math.sqrt(Math.pow(rightEye[0] - leftEye[0], 2) + Math.pow(rightEye[1] - leftEye[1], 2));
+        const scaleMultiplier = eyeDistance / 110;
+
+        // Glasses scaling and offset values
         const scaleX = -0.01;
         const scaleY = -0.01;
-        const offsetX = 0;
-        const offsetY = -0.05;
+        const offsetX = 0.00;
+        const offsetY = -0.07;
 
+        // Glasses positioning
         glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
         glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
         glassesMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        glassesMesh.position.z = 1;
+        glassesMesh.position.z = 1.5;
 
+        // Rotate glasses to align with eyes - rotation depth
         const eyeLine = new THREE.Vector2(rightEye[0] - leftEye[0], rightEye[1] - leftEye[1]);
         const rotationZ = Math.atan2(eyeLine.y, eyeLine.x);
-        
         glassesMesh.rotation.z = rotationZ;
       }
     };
 
+    // Run detection and positioning every 120ms
     const intervalId = setInterval(() => {
       detectAndPositionGlasses();
-    }, 100);
+    }, 120);
 
     return () => clearInterval(intervalId);
   }, [model, glassesMesh]);
 
   return (
-    <div style={{ position: 'relative', width: '800px', height: '800px' }}>
-      <Webcam ref={webcamRef} autoPlay playsInline style={{ width: '800px', height: '800px' }} mirrored={true} />
-      <canvas ref={canvasRef} style={{ width: '800px', height: '800px', position: 'absolute', top: 0, left: 0 }} />
+    <>
+    <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)', marginBottom: '1rem'}}>
+      <h1 style={{textAlign: 'center'}}>Virtual Try-On - 2D Image</h1>
     </div>
+    <div style={{ position: 'relative', margin:'0 auto', width: '640px', height: '480px' }}>
+      <Webcam ref={webcamRef} autoPlay playsInline style={{ width: '640px', height: '480px' }} mirrored={true} />
+      <canvas ref={canvasRef} style={{ width: '640px', height: '480px', position: 'absolute', top: 0, left: 0 }} />
+    </div>
+    </>
   );
 };
 
-export default App;
+export default VirtualTryOn;
