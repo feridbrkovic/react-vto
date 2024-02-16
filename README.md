@@ -1,6 +1,6 @@
 # Virtual Try-On Eyewear In React Using Tensorflow and Three.js
 
-This project combines the power of React, TensorFlow.js, and Three.js to create an interactive and fun virtual try-on experience for eyewear. Our goal is to enhance the online shopping experience, allowing users to try on sunglasses virtually from the comfort of their home.
+This project combines the power of React, TensorFlow.js, and Three.js to create an interactive and fun virtual try-on experience for eyewear. The goal is to enhance the online shopping experience, allowing users to try on sunglasses virtually from the comfort of their home.
 
 ![Virtual Try-On Demo](public/vto-promo.gif)
 
