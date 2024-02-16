@@ -4,6 +4,8 @@ This project combines the power of React, TensorFlow.js, and Three.js to create 
 
 ![Virtual Try-On Demo](public/vto-promo.gif)
 
+Live demo: https://react-vto.vercel.app/
+
 ## Project Overview
 
 This application leverages TensorFlow for facial landmark detection within a video stream, React for building the user interface, and Three.js for placing and adjusting virtual sunglasses in real-time. The result is a seamless virtual try-on experience that mimics trying on glasses in person.
