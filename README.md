@@ -1,70 +1,44 @@
-# Virtual Try-On Glasses in React using Three.js
+# Virtual Try-On Eyewear In React Using Tensorflow and Three.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project combines the power of React, TensorFlow.js, and Three.js to create an interactive and fun virtual try-on experience for eyewear. Our goal is to enhance the online shopping experience, allowing users to try on sunglasses virtually from the comfort of their home.
 
-## Available Scripts
+![Virtual Try-On Demo](public/vto-promo.gif)
 
-In the project directory, you can run:
+## Project Overview
 
-### `npm start`
+This application leverages TensorFlow for facial landmark detection within a video stream, React for building the user interface, and Three.js for placing and adjusting virtual sunglasses in real-time. The result is a seamless virtual try-on experience that mimics trying on glasses in person.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Why 2D Images Over 3D Models?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In the world of ecommerce, especially eyewear, 3D models of products are not commonly available. Most online opticians have an extensive collection of 2D product photos. We decided to tackle this challenge head-on by using these readily available 2D images, making our virtual try-on feature more accessible and easier to implement for a wide range of eyewear retailers.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Node.js installed on your machine
+A basic understanding of React, TensorFlow.js, and Three.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Clone the repo** 
+    ```git clone https://github.com/your_username_/Project-Name.git ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Install NPM packages**
+    ```npm install ```
 
-### `npm run eject`
+- **Add your own path_to_your_glasses_image.png in the project directory to replace the placeholder in the code.**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Run the application**
+    ```npm start run```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Real-time face detection using TensorFlow.js
+Dynamic placement and adjustment of glasses on the user's face using Three.js
+Interactive and responsive design implemented with React
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Enhancements
+Integration of a more lightweight face detection model to improve performance, especially on mobile devices.
+Adding the ability to try on different styles of glasses through a user-friendly interface.
+Enhancements to the realism of glasses fitting, including better scaling and rotation based on facial landmarks.

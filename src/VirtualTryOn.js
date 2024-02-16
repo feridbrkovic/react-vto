@@ -54,7 +54,6 @@ const VirtualTryOn = () => {
           const glasses = new THREE.Mesh(geometry, material);
           scene.add(glasses);
           setGlassesMesh(glasses);
-          renderer.setAnimationLoop(() => renderer.render(scene, camera));
         });
       } catch (error) {
         console.error("Initialization error:", error);
