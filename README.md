@@ -12,14 +12,14 @@ This application leverages TensorFlow for facial landmark detection within a vid
 
 ### Why 2D Images Over 3D Models?
 
-In the world of ecommerce, especially eyewear, 3D models of products are not commonly available. Most online opticians have an extensive collection of 2D product photos. We decided to tackle this challenge head-on by using these readily available 2D images, making our virtual try-on feature more accessible and easier to implement for a wide range of eyewear retailers.
+In the world of ecommerce, especially eyewear, 3D models of products are not commonly available. Most online opticians have an extensive collection of 2D product photos. I decided to tackle this challenge head-on by using these readily available 2D images, making this virtual try-on feature more accessible and easier to implement for a wide range of eyewear retailers.
 
 ## Getting Started
 
 ### Prerequisites
 
-Node.js installed on your machine
-A basic understanding of React, TensorFlow.js, and Three.js
+- Node.js installed on your machine
+- A basic understanding of React, TensorFlow.js, and Three.js
 
 ### Installation
 
@@ -42,5 +42,5 @@ A basic understanding of React, TensorFlow.js, and Three.js
 
 ## Future Enhancements
 - Integration of a more lightweight face detection model to improve performance, especially on mobile devices.
+- Adding handles to the glasses with three.js to create a more interactive experience.
 - Adding the ability to try on different styles of glasses through a user-friendly interface.
-- Enhancements to the realism of glasses fitting, including better scaling and rotation based on facial landmarks.
