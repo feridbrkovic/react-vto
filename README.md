@@ -22,23 +22,23 @@ A basic understanding of React, TensorFlow.js, and Three.js
 ### Installation
 
 - **Clone the repo** 
-    ```git clone https://github.com/your_username_/Project-Name.git ```
+    ```git clone https://github.com/feridbrkovic/react-vto.git ```
 
 - **Install NPM packages**
     ```npm install ```
 
-- **Add your own path_to_your_glasses_image.png in the project directory to replace the placeholder in the code.**
+- **Add your own ```path_to_your_glasses_image.png``` in the project directory to replace the placeholder in the code.**
 
 - **Run the application**
     ```npm start run```
 
 ## Features
 
-Real-time face detection using TensorFlow.js
-Dynamic placement and adjustment of glasses on the user's face using Three.js
-Interactive and responsive design implemented with React
+- Real-time face detection using TensorFlow.js
+- Dynamic placement and adjustment of glasses on the user's face using Three.js
+- Interactive and responsive design implemented with React
 
 ## Future Enhancements
-Integration of a more lightweight face detection model to improve performance, especially on mobile devices.
-Adding the ability to try on different styles of glasses through a user-friendly interface.
-Enhancements to the realism of glasses fitting, including better scaling and rotation based on facial landmarks.
+- Integration of a more lightweight face detection model to improve performance, especially on mobile devices.
+- Adding the ability to try on different styles of glasses through a user-friendly interface.
+- Enhancements to the realism of glasses fitting, including better scaling and rotation based on facial landmarks.
